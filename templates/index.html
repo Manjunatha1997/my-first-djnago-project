@@ -1,0 +1,158 @@
+
+{% load static %}
+{% static "img/bg-img" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Card</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+            background: url("/static/img/bg-img/blog1.jpg");
+        }
+    </style>
+
+
+
+
+</head>
+<body>
+
+
+<!-- navbar section-->
+<div class="container" id="menu">
+    <nav class="navbar navbar-expand-sm bg-light">
+            <ul class="navbar nav">
+
+                {% if user.is_authenticated %}
+
+                     <li class="nav-item">
+                     <a class="nav-link text-uppercase" href="#" >Welcome, {{ user.first_name }}</a>
+                     </li>
+
+                     <li class="nav-item">
+                     <a class="nav-link" href="accounts/logout">Log out</a>
+                     </li>
+
+                    {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Courses">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#Portfolio">Port-Folio</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="accounts/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="accounts/login">Log in</a>
+                </li>
+
+
+
+
+                {% endif %}
+            </ul>
+
+
+    </nav>
+
+
+
+</div>
+
+
+<!--close register-->
+
+
+
+
+
+<!--close navbar-->
+
+<!--courses section-->
+
+
+
+{% if user.is_authenticated %}
+
+    {% else %}
+
+<div class="container" id="Courses">
+<div class="jumbotron">
+        <div class="card">
+          <div class="card-header text-center h3 text-info">Courses</div>
+        </div>
+             <div class="row">
+                 {% for course in courses %}
+                         <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="card">
+
+                                  <div class="card-body img-thumbnail">
+                                      <p class="card-title">course name:<span class="text-warning">{{ course.name }}</span></p>
+                                      <p class="card-text text-justify">trainer:<span class="text-warning">{{ course.teacher }}</span></p>
+                                      <p class="card-link">duration:<span class="text-warning">{{ course.duration }} months</span></p>
+                                  </div>
+
+                            </div>
+                         </div>
+                 {% endfor %}
+
+        </div>
+</div>
+</div>
+
+{% endif %}
+
+
+<!--close course section-->
+
+<!--portfolio section-->
+
+{% if user.is_authenticated %}
+    {% else %}
+
+
+
+<div class="container" id="Portfolio">
+<div class="jumbotron">
+        <div class="card">
+          <div class="card-header text-center h3 text-info">My Port Folio</div>
+        </div>
+             <div class="row">
+                 {% for i in pf %}
+                         <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="card">
+
+                                <img src="{{ i.img.url }} " class="card-img-top img-thumbnail" style="height: 170px;width: 300px">
+                                  <div class="card-body img-thumbnail">
+                                    <h4 class="card-title">{{ i.name }}</h4>
+                                    <p class="card-text text-justify">{{ i.qual }}</p>
+                                    <a href="#" class="card-link">{{ i.email }}</a>
+                                  </div>
+                                     <div class="card-footer">
+                                        <button type="button" class="btn btn-success">click</button>
+                                     </div>
+                            </div>
+                         </div>
+                 {% endfor %}
+
+        </div>
+</div>
+</div>
+{% endif %}
+
+
+<!--close portfolio-->
+
+
+</body>
+</html>
